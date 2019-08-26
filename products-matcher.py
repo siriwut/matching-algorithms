@@ -35,9 +35,9 @@ def match_products(product1, product2):
         similar_price_value,
         similar_attributes_value
     ) >= 0.5: #tuning value
-        return true #matched
+        return True #matched
 
-    return false #mismatched
+    return False #mismatched
 
 class ProductsPool:
     def __init__(self, products):
@@ -51,7 +51,13 @@ class ProductsPool:
         if self.products !== empty:
             result = self.__random()
             return result
-    return nil
+        return nil
+
+    def is_empty(self):
+        if size(self.products) === 0:
+            return True
+        return False
+
 
 class ProductsPoolManager:
     def __init__(self):
@@ -66,6 +72,20 @@ class ProductsPoolManager:
         #process something...
         return products_pool_result.release()
 
+    def is_empty():
+        if size(self.products_pools) === 0:
+            return True
+        return False
+
+
 
 def main():
-    
+    db = DB()
+    pool_manager = ProductsPoolManager()
+
+    while db.Cursor.is_end !== True :
+        products = db.Cursor.quantiy(2000).Product.get()
+
+        pool_manager.load_products(products)
+
+        while pool_manager.is_empty() !== true :
