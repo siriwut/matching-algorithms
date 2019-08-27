@@ -20,7 +20,7 @@ product1 = [{
      'price': 2390.00,
      'attributes': {
          'brand': 'CONVERSE',
-         'color': 'BLACK',
+         'color': 'ดำ',
          'model_number': 'A1234',
      }
  }]
@@ -41,7 +41,7 @@ product2 = [{
      'price': 2390.00,
      'attributes': {
          'brand': 'CONVERSE',
-         'color': 'BLACK',
+         'color': 'ดำ',
          'model_number': 'A1234',
      }
  }]
@@ -75,6 +75,9 @@ def main():
     print('--MEAN2--')
     avg2 = statistics.mean([name2, brand2, color2])
     print(avg2)
+
+    # print(similar('60.00', '55.00'))
+    # print(similar('50', '55'))
 
     # print(value2)
     # print(value2)
