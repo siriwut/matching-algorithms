@@ -39,19 +39,31 @@ def match_products(product1, product2):
 
     return False #mismatched
 
+def process_matching_product(products):
+    matched_products = []
+
+    while size(products) !== 0 :
+       couple = get_couple(products)
+
+       if match_products(couple['product1'], couple['product2']) === True:
+           matched_products.push([couple['product1'], couple['product2']])
+
+    return matched_products
+
+
 class ProductsPool:
     def __init__(self, products):
         self.products = products
 
-    def __random():
-        #random products...
-        return result_products
+    def __random(self):
+        products_result = random(self.products) #do some random algorithm
+        return products_result
 
     def release(self):
-        if self.products !== empty:
-            result = self.__random()
-            return result
-        return nil
+        if size(self.products) !== 0:
+            products_result = self.__random(self.products)
+            return products_result
+        return None
 
     def is_empty(self):
         if size(self.products) === 0:
@@ -63,13 +75,14 @@ class ProductsPoolManager:
     def __init__(self):
         self.products_pools = []
 
-    def load_products(products):
+    def fill_products(products):
         self.products_pools.append(
             ProductsPool(products)
         )
 
     def release(self):
-        #process something...
+        products_pool_result = get_pool(self.products_pools)
+
         return products_pool_result.release()
 
     def is_empty():
@@ -81,11 +94,24 @@ class ProductsPoolManager:
 
 def main():
     db = DB()
+    i = 0
+    loop_times = 5
     pool_manager = ProductsPoolManager()
+    matched_products = []
 
-    while db.Cursor.is_end !== True :
-        products = db.Cursor.quantiy(2000).Product.get()
-
-        pool_manager.load_products(products)
+    while i < loop_times: #run multiple times to get most acculately matched products
+        while db.Cursor.is_end !== True :
+            products = db.Cursor.quantiy(2000).Product.get()
+            pool_manager.fill_products(products)
 
         while pool_manager.is_empty() !== true :
+             products = pool_manager.release()
+             matched_results = process_matching_products(products)
+
+             matched_products.push(matched_results)
+        i++
+
+
+
+
+    db.MatchedProducts.save(matched_products)
